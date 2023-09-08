@@ -7,14 +7,26 @@ import {
   PermissionsAndroid,
   TouchableOpacity,
 } from 'react-native';
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+  useResponsiveHeight,
+} from 'react-native-responsive-dimensions';
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  moderateVerticalScale,
+} from 'react-native-size-matters';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-
+import NavBar from '../components/NavBar';
 const icon = <FontAwesome6 name={'comments'} />;
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 
 const Tab = createBottomTabNavigator();
@@ -72,8 +84,9 @@ const HomeScreen = () => {
   };
   return (
     <View style={styles.container}>
-      <MapView
+      {/* <MapView
         style={{width: '100%', height: '100%'}}
+        provider={PROVIDER_GOOGLE}
         initialRegion={{
           latitude: 30.230722255105633,
           longitude: 71.5174780752946,
@@ -83,8 +96,8 @@ const HomeScreen = () => {
         zoomEnabled={true}
         showsUserLocation={true}>
         <Marker coordinate={{latitude: mLat, longitude: mLong}} />
-      </MapView>
-      <View style={styles.bootomSheet}>
+      </MapView> */}
+      {/* <View style={styles.bootomSheet}>
         <View style={styles.upperBotm}>
           <View style={styles.tabBtn}>
             <TouchableOpacity
@@ -185,11 +198,10 @@ const HomeScreen = () => {
             <Text>offer Pool</Text>
           </View>
         )}
-      </View>
+      </View> */}
 
-      <View style={styles.NavContainer}></View>
-      <View style={styles.NavContainer}>
-        <Pressable
+      {/* <View style={styles.NavContainer}> */}
+      {/* <Pressable
           onPress={() => {
             getLocation();
           }}
@@ -202,8 +214,8 @@ const HomeScreen = () => {
             color="#50478f"
             style={{fontSize: 30}}
           />
-        </Pressable>
-        <View style={styles.NavBar}>
+        </Pressable> */}
+      {/* <View style={styles.NavBar}>
           <Pressable
             onPress={() => changeText('Home')}
             style={styles.IconBehaviour}
@@ -230,7 +242,7 @@ const HomeScreen = () => {
             />
             <Text style={styles.IconText}>Trips</Text>
           </Pressable>
-          <Pressable
+          {/* <Pressable
             onPress={() => changeText('Help')}
             style={styles.IconBehaviour}
             android_ripple={{borderless: true, radius: 50}}>
@@ -242,9 +254,9 @@ const HomeScreen = () => {
               style={{fontSize: 30}}
             />
             <Text style={styles.IconText}>Help</Text>
-          </Pressable>
+          </Pressable> */}
 
-          <Pressable
+      {/* <Pressable
             onPress={() => changeText('More')}
             style={styles.IconBehaviour}
             android_ripple={{borderless: true, radius: 50}}>
@@ -257,9 +269,10 @@ const HomeScreen = () => {
             />
             <Text style={styles.IconText}>More</Text>
           </Pressable>
-        </View>
-      </View>
+        </View> */}
+      <NavBar />
     </View>
+    // </View>
   );
 };
 

@@ -1,6 +1,6 @@
 // Onboarding 3
 import * as React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, SafeAreaView} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -17,11 +17,7 @@ import OnboardingText from '../../components/OnboardingText';
 const Onboarding3 = () => {
   const navigation = useNavigation();
   return (
-    <ScrollView
-      contentContainerStyle={styles.Onboarding3}
-      alwaysBounceHorizontal={false}
-      alwaysBounceVertical={false}
-      bounces={false}>
+    <SafeAreaView style={styles.Onboarding3}>
       <Logo />
 
       <OnbordingCenter
@@ -38,7 +34,7 @@ const Onboarding3 = () => {
         screen={NavigationStrings.HOMESCREEN}
         screen2={NavigationStrings.REGISTER}
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

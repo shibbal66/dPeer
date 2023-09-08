@@ -3,6 +3,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  SafeAreaView,
   View,
   Dimensions,
   Text,
@@ -29,7 +30,7 @@ const Register = () => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image
         style={styles.regpic}
         source={require('../assets/images/regpic2.png')}
@@ -139,7 +140,7 @@ const Register = () => {
         />
         <Text style={styles.buttonText}>Connect to Metamask</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
