@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  PermissionsAndroid,
-  TouchableOpacity,
-} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {
   responsiveHeight,
   responsiveWidth,
@@ -26,16 +19,8 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 const icon = <FontAwesome6 name={'comments'} />;
 const Tab = createBottomTabNavigator();
-var iconHeight = 26;
-var iconWidth = 29;
 
 const NavBar = () => {
-  const [screenText, setScreenText] = useState('Press a button');
-  const [Bottomtab, setBottomTab] = useState(0);
-  const changeText = text => {
-    console.log(text + ' has been pressed');
-    setScreenText(text);
-  };
   return (
     <View style={styles.NavBar}>
       <Pressable
@@ -47,7 +32,7 @@ const NavBar = () => {
           height={moderateVerticalScale(25)}
           width={moderateScale(28)}
           color="#50478f"
-          style={{fontSize: moderateScale(29.4)}}
+          style={{fontSize: moderateScale(29.5)}}
         />
         <Text style={styles.IconText}>Home</Text>
       </Pressable>
@@ -95,11 +80,6 @@ const NavBar = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#3962FF',
-  },
-
   NavBar: {
     flexDirection: 'row',
     backgroundColor: '#eee',
@@ -117,32 +97,6 @@ const styles = StyleSheet.create({
     color: '#000', // Change this to the desired text color
 
     alignItems: 'center',
-  },
-  //   bootomSheet: {
-  //     width: responsiveWidth(87),
-  //     height: responsiveHeight(40),
-  //     top: '90%',
-  //     backgroundColor: 'red',
-  //     position: 'absolute',
-  //     borderRadius: 35,
-  //   },
-  //   upperBotm: {
-  //     width: '100%',
-
-  //     height: '22%',
-  //     backgroundColor: '#50478f',
-  //     borderRadius: 35,
-  //   },
-  tabBtn: {
-    width: '100%',
-    height: 60,
-    borderWidth: 0.3,
-    borderRadius: 35,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 5,
-    paddingRight: 22,
-    paddingTop: 19,
   },
 });
 export default NavBar;
