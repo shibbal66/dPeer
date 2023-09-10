@@ -49,19 +49,6 @@ const NavBar = () => {
         />
         <Text style={styles.IconText}>Trips</Text>
       </Pressable>
-      {/* <Pressable
-            onPress={() => changeText('Help')}
-            style={styles.IconBehaviour}
-            android_ripple={{borderless: true, radius: 50}}>
-            <AntDesign
-              name="customerservice"
-              height={iconHeight}
-              width={iconWidth}
-              color="#50478f"
-              style={{fontSize: 30}}
-            />
-            <Text style={styles.IconText}>Help</Text>
-          </Pressable> */}
 
       <Pressable
         onPress={() => changeText('More')}
@@ -83,7 +70,7 @@ const styles = StyleSheet.create({
   NavBar: {
     flexDirection: 'row',
     backgroundColor: '#eee',
-    width: responsiveWidth(82),
+    width: responsiveWidth(80),
     height: responsiveHeight(9),
 
     justifyContent: 'space-evenly',
