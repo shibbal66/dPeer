@@ -3,6 +3,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ChooseLocation from './ChooseLocation';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
+import CarTypes from './CarTypes';
 import React, {useState} from 'react';
 import {
   responsiveFontSize,
@@ -88,6 +89,7 @@ const PoolView = () => {
             borderRadius: moderateScale(35),
             width: responsiveWidth(88),
           }}>
+          <CarTypes />
           <ChooseLocation />
         </View>
       ) : (
@@ -96,10 +98,10 @@ const PoolView = () => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'black',
+            backgroundColor: 'white',
             borderRadius: moderateScale(35),
           }}>
-          <Text>offer Pool</Text>
+          <CarTypes />
         </View>
       )}
     </View>
