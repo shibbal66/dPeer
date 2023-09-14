@@ -5,6 +5,7 @@ import ChooseLocation from './ChooseLocation';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
 import CarTypes from './CarTypes';
 import React, {useState} from 'react';
+import Button from './Button';
 import {
   responsiveFontSize,
   responsiveHeight,
@@ -83,25 +84,25 @@ const PoolView = () => {
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
 
             backgroundColor: '#edebebf5',
             borderRadius: moderateScale(35),
             width: responsiveWidth(88),
           }}>
           <CarTypes />
-          <ChooseLocation />
+
+          <Button text={'Find Pool'} />
         </View>
       ) : (
         <View
           style={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
+
             backgroundColor: 'white',
             borderRadius: moderateScale(35),
           }}>
           <CarTypes />
+          <Button text={'Offer Pool'} />
         </View>
       )}
     </View>

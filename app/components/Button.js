@@ -1,4 +1,4 @@
-import {Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {Text, TouchableOpacity, View, StyleSheet, Image} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import {
@@ -8,19 +8,25 @@ import {
 } from 'react-native-responsive-dimensions';
 
 const Button = props => {
+  // const confirm
   return (
-    <TouchableOpacity style={styles.buttonContainer}>
-      {/* <Image
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.buttonContainer}>
+        {/* <Image
         style={styles.logo}
         source={require('../assets/images/metalogow.png')}
       /> */}
-      <Text style={styles.buttonText}>{props.text}</Text>
-    </TouchableOpacity>
+        <Text style={styles.buttonText}>{props.text}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
   buttonContainer: {
-    width: responsiveWidth(80),
+    width: responsiveWidth(65),
     height: responsiveHeight(7.5),
     borderRadius: moderateScale(35),
 

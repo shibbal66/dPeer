@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, PermissionsAndroid} from 'react-native';
+import {StyleSheet, View, PermissionsAndroid, Platform} from 'react-native';
 // import Geolocation from '@react-native-community/geolocation';
 
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Geolocation from 'react-native-geolocation-service';
 
+import Geolocation from '@react-native-community/geolocation';
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
 const Maps = () => {
   const [mLat, setmLat] = useState(0);
   const [mLong, setmLong] = useState(0);
@@ -40,6 +44,14 @@ const Maps = () => {
       console.warn(err);
     }
   };
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      requestCameraPermission();
+    } else {
+      Geolocation.requestAuthorization();
+    }
+  }, []);
+
   const getLocation = () => {
     Geolocation.getCurrentPosition(
       position => {
@@ -55,10 +67,9 @@ const Maps = () => {
     );
   };
   return (
-    // <View style={styles.Mapscontainer}>
     <MapView
+      style={{width: responsiveWidth(100), height: responsiveHeight(40)}}
       provider={PROVIDER_GOOGLE}
-      style={{width: '100%', height: '100%'}}
       initialRegion={{
         latitude: 30.230722255105633,
         longitude: 71.5174780752946,
@@ -66,12 +77,13 @@ const Maps = () => {
         longitudeDelta: 0.4,
       }}
       zoomEnabled={true}
-      showsUserLocation={true}>
-      {/* showsMyLocationButton={true} */}
-      <Marker coordinate={{latitude: mLat, longitude: mLong}} />
+      showsUserLocation={true}
+      showsMyLocationButton={true}>
+      <Marker
+        coordinate={{latitude: 30.230722255105633, longitude: 71.5174780752946}}
+        image={require('../assets/images/car.png')}
+      />
     </MapView>
-    //</View>
-    // </View>
   );
 };
 

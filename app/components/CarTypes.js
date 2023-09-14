@@ -15,7 +15,7 @@ const CarTypes = () => {
             style={styles.regpic}
             source={require('../assets/images/bike.png')}
           />
-          <Text>Bike</Text>
+          <Text style={styles.CarText}>Bike</Text>
         </View>
       </TouchableOpacity>
 
@@ -24,14 +24,14 @@ const CarTypes = () => {
           style={styles.regpic}
           source={require('../assets/images/car.png')}
         />
-        <Text>Car</Text>
+        <Text style={styles.CarText}>Car</Text>
       </View>
       <View>
         <Image
           style={styles.regpic}
           source={require('../assets/images/car.png')}
         />
-        <Text>Car Ac</Text>
+        <Text style={styles.CarText}>Car Ac</Text>
       </View>
     </View>
   );
@@ -46,12 +46,18 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
 
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     justifyContent: 'space-between',
-    paddingHorizontal: moderateScale(30),
+    paddingHorizontal: moderateScale(34),
+    marginBottom: moderateScale(12),
   },
   regpic: {
-    width: moderateScale(70),
-    height: moderateScale(),
+    width: moderateScale(65),
+    height: moderateScale(52),
+  },
+  CarText: {
+    fontSize: responsiveFontSize(1.8),
+    fontWeight: '600',
+    paddingHorizontal: moderateScale(13),
   },
 });
