@@ -523,6 +523,8 @@ PODS:
     - React-perflogger (= 0.72.3)
   - RNCAsyncStorage (1.19.1):
     - React-Core
+  - RNDateTimePicker (7.5.0):
+    - React-Core
   - RNGestureHandler (2.12.0):
     - React-Core
   - RNPermissions (3.9.0):
@@ -532,8 +534,8 @@ PODS:
     - React-RCTImage
   - RNScrypt (1.2.1):
     - React
-  - RNSVG (12.1.1):
-    - React
+  - RNSVG (12.5.1):
+    - React-Core
   - RNVectorIcons (10.0.0):
     - React-Core
   - SocketRocket (0.6.1)
@@ -611,6 +613,7 @@ DEPENDENCIES:
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -730,6 +733,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNDateTimePicker:
+    :path: "../node_modules/@react-native-community/datetimepicker"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNPermissions:
@@ -809,11 +814,12 @@ SPEC CHECKSUMS:
   React-utils: bcb57da67eec2711f8b353f6e3d33bd8e4b2efa3
   ReactCommon: 3ccb8fb14e6b3277e38c73b0ff5e4a1b8db017a9
   RNCAsyncStorage: f47fe18526970a69c34b548883e1aeceb115e3e1
+  RNDateTimePicker: b722c23030b744763cf51d80fc22f354653f65e0
   RNGestureHandler: dec4645026e7401a0899f2846d864403478ff6a5
   RNPermissions: 2e68b2e82a93ad09327dee8822846fead91ca3ad
   RNScreens: 6a8a3c6b808aa48dca1780df7b73ea524f602c63
   RNScrypt: 95fdef077b482e9fdf8a761120cb69d129ef4016
-  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 8796b55dba14d7004f980b54bcc9833ee45b28ce

@@ -11,6 +11,7 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Platform,
+  Image,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -76,6 +77,7 @@ const HomeScreen = () => {
         bounces={false}>
         <View style={styles.container}>
           <Maps />
+          <Image source={require('../assets/images/mapImg.jpeg')} />
           <View style={styles.ViewPool}>
             <PoolView />
           </View>

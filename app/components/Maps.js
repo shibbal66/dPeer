@@ -1,8 +1,15 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, PermissionsAndroid, Platform} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  PermissionsAndroid,
+  Platform,
+  Image,
+} from 'react-native';
 // import Geolocation from '@react-native-community/geolocation';
 
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 
 import Geolocation from '@react-native-community/geolocation';
 import {
@@ -10,6 +17,15 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 const Maps = () => {
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y';
+  const origin = {
+    latitude: 30.230722255105633,
+    longitude: 71.5174780752946,
+  };
+  const destination = {
+    latitude: 30.230722255605633,
+    longitude: 71.5174780742946,
+  };
   const [mLat, setmLat] = useState(0);
   const [mLong, setmLong] = useState(0);
   const [screenText, setScreenText] = useState('Press a button');
@@ -68,7 +84,7 @@ const Maps = () => {
   };
   return (
     <MapView
-      style={{width: responsiveWidth(100), height: responsiveHeight(40)}}
+      style={{width: responsiveWidth(100), height: responsiveHeight(38)}}
       provider={PROVIDER_GOOGLE}
       initialRegion={{
         latitude: 30.230722255105633,
@@ -80,8 +96,21 @@ const Maps = () => {
       showsUserLocation={true}
       showsMyLocationButton={true}>
       <Marker
-        coordinate={{latitude: 30.230722255105633, longitude: 71.5174780752946}}
-        image={require('../assets/images/car.png')}
+        coordinate={{
+          latitude: 30.230722255105633,
+          longitude: 71.5174780752946,
+        }}>
+        <Image
+          style={{width: 50, height: 50, resizeMode: 'contain'}}
+          source={require('../assets/images/topcar2.png')}
+        />
+      </Marker>
+      <MapViewDirections
+        origin={origin}
+        destination={destination}
+        apikey={GOOGLE_MAPS_APIKEY}
+        strokeWidth={4}
+        strokeColor="purple"
       />
     </MapView>
   );

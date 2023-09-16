@@ -12,6 +12,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import {moderateScale} from 'react-native-size-matters';
+import DateTimePick from './DateTimePick';
 const Tab = createBottomTabNavigator();
 
 const PoolView = () => {
@@ -91,6 +92,8 @@ const PoolView = () => {
           }}>
           <CarTypes />
 
+          <DateTimePick />
+
           <Button text={'Find Pool'} />
         </View>
       ) : (
@@ -102,6 +105,7 @@ const PoolView = () => {
             borderRadius: moderateScale(35),
           }}>
           <CarTypes />
+
           <Button text={'Offer Pool'} />
         </View>
       )}
