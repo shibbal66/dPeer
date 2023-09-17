@@ -104,8 +104,8 @@ const PoolView = () => {
             backgroundColor: 'white',
             borderRadius: moderateScale(35),
           }}>
-          <CarTypes />
-
+          {/* <CarTypes /> */}
+          <ChooseLocation />
           <Button text={'Offer Pool'} />
         </View>
       )}

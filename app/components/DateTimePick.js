@@ -3,10 +3,15 @@ import React, {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const DateTimePick = () => {
+  const currentDate = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(currentDate.getDate() + 10);
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setselecteddate] = useState('Select Date');
   const [selectedTime, setselectedtime] = useState('Select Time');
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+  const [minimumTime, setMinimumTime] = useState(null);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -17,19 +22,23 @@ const DateTimePick = () => {
   };
 
   const handleDateConfirm = date => {
-    //console.warn('A date has been picked: ', date);
     const dt = new Date(date);
-    const x1 = `${dt.getDate()}/${dt.getMonth() + 1}/${dt.getFullYear()}`;
-    setselecteddate(x1);
+
+    if (!isNaN(dt)) {
+      const x1 = `${dt.getDate()}/${dt.getMonth() + 1}/${dt.getFullYear()}`;
+      setselecteddate(x1);
+
+      // If the selected date is in the future (including tomorrow), set minimumTime to null
+      setMinimumTime(dt >= currentDate ? null : currentDate);
+    }
+
     hideDatePicker();
-    showTimePicker();
   };
 
   const showTimePicker = () => {
-    // Show the time picker when the date is selected
     if (selectedDate !== 'Select Date') {
-      setDatePickerVisibility(false); // Hide the date picker
-      setTimePickerVisibility(true); // Show the time picker
+      setDatePickerVisibility(false);
+      setTimePickerVisibility(true);
     }
   };
 
@@ -38,17 +47,18 @@ const DateTimePick = () => {
   };
 
   const handleTimeConfirm = date => {
-    console.warn('A time has been picked: ', date);
     const tm = new Date(date);
 
-    // Define options to format the time in 12-hour format with 'am/pm'
-    const formattedTime = tm.toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    });
+    if (!isNaN(tm)) {
+      const formattedTime = tm.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+      });
 
-    setselectedtime(formattedTime);
+      setselectedtime(formattedTime);
+    }
+
     hideTimePicker();
   };
 
@@ -72,12 +82,16 @@ const DateTimePick = () => {
         isVisible={isDatePickerVisible}
         mode="date"
         onConfirm={handleDateConfirm}
+        minimumDate={currentDate}
+        maximumDate={maxDate}
+        display="inline"
         onCancel={hideDatePicker}
       />
       <DateTimePickerModal
         isVisible={isTimePickerVisible}
         mode="time"
         onConfirm={handleTimeConfirm}
+        minimumDate={minimumTime}
         onCancel={hideTimePicker}
       />
     </View>
@@ -89,6 +103,7 @@ export default DateTimePick;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    backgroundColor: 'red',
   },
   btn: {
     padding: 10,
