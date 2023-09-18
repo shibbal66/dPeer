@@ -68,7 +68,7 @@ const Register = () => {
           setClicked(!clicked);
         }}>
         <Text style={{fontWeight: '600'}}>
-          {selectedCountry == '' ? 'Select Country' : selectedCountry}
+          {selectedCountry == '' ? 'Select City' : selectedCountry}
         </Text>
         {clicked ? (
           <Image

@@ -49,15 +49,16 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     justifyContent: 'space-between',
     paddingHorizontal: moderateScale(34),
-    marginBottom: moderateScale(12),
+    marginBottom: moderateScale(1),
+    marginTop: moderateScale(8),
   },
   regpic: {
-    width: moderateScale(65),
-    height: moderateScale(52),
+    width: moderateScale(55),
+    height: moderateScale(40),
   },
   CarText: {
     fontSize: responsiveFontSize(1.8),
-    fontWeight: '600',
-    paddingHorizontal: moderateScale(13),
+    fontWeight: '700',
+    paddingHorizontal: moderateScale(10),
   },
 });

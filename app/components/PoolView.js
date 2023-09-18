@@ -92,6 +92,7 @@ const PoolView = () => {
           }}>
           <CarTypes />
 
+          <ChooseLocation />
           <DateTimePick />
 
           <Button text={'Find Pool'} />
@@ -101,7 +102,7 @@ const PoolView = () => {
           style={{
             flex: 1,
 
-            backgroundColor: 'white',
+            backgroundColor: '#edebebf5',
             borderRadius: moderateScale(35),
           }}>
           {/* <CarTypes /> */}

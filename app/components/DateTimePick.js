@@ -1,6 +1,11 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {
+  responsiveFontSize,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {moderateScale} from 'react-native-size-matters';
 
 const DateTimePick = () => {
   const currentDate = new Date();
@@ -69,14 +74,14 @@ const DateTimePick = () => {
         onPress={() => {
           showDatePicker();
         }}>
-        <Text>{selectedDate}</Text>
+        <Text style={styles.datetimeText}>{selectedDate}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.btn}
         onPress={() => {
           showTimePicker();
         }}>
-        <Text>{selectedTime}</Text>
+        <Text style={styles.datetimeText}>{selectedTime}</Text>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -103,15 +108,20 @@ export default DateTimePick;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'red',
+    //backgroundColor: 'red',
   },
   btn: {
-    padding: 10,
-    backgroundColor: '#eee',
-    marginVertical: 5,
-    marginLeft: 20,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: responsiveWidth(25.8),
+
+    //backgroundColor: 'grey',
+    marginVertical: 9,
+    marginLeft: moderateScale(34),
+    //borderRadius: 8,
+    borderBottomWidth: 2,
+    borderBottomColor: '#50478f',
+  },
+  datetimeText: {
+    fontSize: responsiveFontSize(2.4),
+    padding: '',
   },
 });

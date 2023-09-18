@@ -11,23 +11,13 @@ const PlaceRow = ({data}) => {
   return (
     <View style={styles.row}>
       <View style={styles.iconContainer}>
-        {data.description === 'Home' ? (
-          <MaterialIcons
-            name="home"
-            color={'white'}
-            width={responsiveWidth(7)}
-            height={responsiveHeight(4.5)}
-            style={{fontSize: moderateScale(23)}}
-          />
-        ) : (
-          <MaterialIcons
-            name="location-pin"
-            color={'white'}
-            width={responsiveWidth(7)}
-            height={responsiveHeight(4.5)}
-            style={{fontSize: moderateScale(23)}}
-          />
-        )}
+        <MaterialIcons
+          name="location-pin"
+          color={'#50478f'}
+          width={responsiveWidth(7)}
+          height={responsiveHeight(4.5)}
+          style={{fontSize: moderateScale(23)}}
+        />
       </View>
       <Text style={styles.locationText}>
         {data.description || data.vicinity}
@@ -39,12 +29,14 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 10,
+    marginVertical: responsiveHeight(0.2),
+    //position: 'absolute',
+    // backgroundColor: 'red',
   },
   iconContainer: {
-    backgroundColor: '#a2a2a2',
-    padding: 5,
-    borderRadius: 50,
+    backgroundColor: 'white',
+    padding: 2,
+    borderRadius: moderateScale(10),
     marginRight: 15,
   },
   locationText: {},

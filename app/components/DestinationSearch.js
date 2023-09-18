@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, SafeAreaView, StyleSheet} from 'react-native';
+import {View, TextInput, SafeAreaView, StyleSheet, Modal} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
@@ -10,6 +10,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {moderateScale} from 'react-native-size-matters';
 import PlaceRow from '../components/PlaceRow';
+import {mode} from 'native-base/lib/typescript/theme/tools';
 
 const homePlace = {
   description: 'Home',
@@ -23,6 +24,7 @@ const workPlace = {
 const DestinationSearch = props => {
   const [originPlace, setOriginPlace] = useState(null);
   const [destinationPlace, setDestinationPlace] = useState(null);
+  const [clicked, setClicked] = useState(false); // Add clicked state
 
   const navigation = useNavigation();
 
@@ -40,20 +42,21 @@ const DestinationSearch = props => {
   }, [originPlace, destinationPlace]);
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <View style={styles.container}>
+      <View style={[styles.autocompleteContainer, {zIndex: clicked ? 1 : 0}]}>
         <GooglePlacesAutocomplete
           placeholder="Where from?"
           onPress={(data, details = null) => {
             setOriginPlace({data, details});
+            setClicked(!clicked);
           }}
           enablePoweredByContainer={false}
           suppressDefaultStyles
           currentLocation={true}
-          currentLocationLabel="Current location"
+          // currentLocationLabel="Current location"
           styles={{
             textInput: styles.textInput,
-            container: styles.autocompleteContainer,
+
             listView: styles.listView,
             separator: styles.separator,
           }}
@@ -64,10 +67,10 @@ const DestinationSearch = props => {
           }}
           renderRow={data => <PlaceRow data={data} />}
           renderDescription={data => data.description || data.vicinity}
-          predefinedPlaces={[homePlace, workPlace]}
+          // predefinedPlaces={[homePlace, workPlace]}
         />
-
-        <GooglePlacesAutocomplete
+      </View>
+      {/* <GooglePlacesAutocomplete
           placeholder="Where to?"
           onPress={(data, details = null) => {
             setDestinationPlace({data, details});
@@ -78,7 +81,6 @@ const DestinationSearch = props => {
             textInput: styles.textInput,
             container: {
               ...styles.autocompleteContainer,
-              top: 55,
             },
             separator: styles.separator,
           }}
@@ -88,46 +90,50 @@ const DestinationSearch = props => {
             language: 'en',
           }}
           renderRow={data => <PlaceRow data={data} />}
+        /> */}
+
+      {/* Circle near Origin input */}
+      <View style={styles.personpin}>
+        <MaterialIcons
+          name="person-pin-circle"
+          color={'#50478f'}
+          width={responsiveWidth(7)}
+          height={responsiveHeight(4.5)}
+          style={{fontSize: moderateScale(23)}}
         />
-
-        {/* Circle near Origin input */}
-        <View style={styles.personpin}>
-          <MaterialIcons
-            name="person-pin-circle"
-            color={'#50478f'}
-            width={responsiveWidth(7)}
-            height={responsiveHeight(4.5)}
-            style={{fontSize: moderateScale(23)}}
-          />
-        </View>
-
-        {/* Line between dots */}
-        <View style={styles.line} />
-
-        {/* Square near Destination input */}
-        <View style={styles.locationpin}>
-          <MaterialIcons
-            name="location-pin"
-            color={'#e60000'}
-            width={responsiveWidth(7)}
-            height={responsiveHeight(4.5)}
-            style={{fontSize: moderateScale(23)}}
-          />
-        </View>
       </View>
-    </SafeAreaView>
+
+      {/* Line between dots */}
+      <View style={styles.line} />
+
+      {/* Square near Destination input */}
+      <View style={styles.locationpin}>
+        <MaterialIcons
+          name="location-pin"
+          color={'#e60000'}
+          width={responsiveWidth(7)}
+          height={responsiveHeight(4.5)}
+          style={{fontSize: moderateScale(23)}}
+        />
+      </View>
+    </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    height: '100%',
+    height: responsiveHeight(14),
+    position: 'relative',
+    // backgroundColor: 'green',
+
+    borderRadius: 10,
+    marginTop: 10,
+    //backgroundColor: '#fff',
   },
   textInput: {
     padding: 10,
-    backgroundColor: '#eee',
-    marginVertical: 5,
-    marginLeft: 20,
+    //backgroundColor: 'red',
+    marginVertical: moderateScale(4),
+    marginLeft: moderateScale(24),
   },
 
   separator: {
@@ -136,19 +142,24 @@ const styles = StyleSheet.create({
   },
   listView: {
     position: 'absolute',
-    top: 105,
+    marginTop: responsiveHeight(12),
+    height: responsiveHeight(12),
+    //backgroundColor: '#fff',
   },
   autocompleteContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 10,
-    right: 10,
+    //backgroundColor: 'red',
+    marginTop: responsiveHeight(1),
+    marginLeft: responsiveWidth(3),
+    marginRight: responsiveWidth(6),
+
+    height: responsiveHeight(6),
+    borderRadius: moderateScale(15),
   },
 
   personpin: {
     position: 'absolute',
-    top: responsiveHeight(1.5),
-    left: responsiveWidth(1.4),
+    marginTop: responsiveHeight(2.2),
+    marginLeft: responsiveWidth(1.8),
   },
   line: {
     width: 1,
@@ -160,8 +171,8 @@ const styles = StyleSheet.create({
   },
   locationpin: {
     position: 'absolute',
-    top: responsiveHeight(10),
-    left: responsiveWidth(1.8),
+    marginTop: responsiveHeight(8.7),
+    marginLeft: responsiveWidth(1.8),
   },
 });
 export default DestinationSearch;
