@@ -24,16 +24,16 @@ const Button = props => {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    zIndex: 0,
   },
   buttonContainer: {
     width: responsiveWidth(65),
     height: responsiveHeight(7.5),
     borderRadius: moderateScale(35),
-
+    zIndex: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-
     backgroundColor: '#50478f',
   },
   buttonText: {

@@ -42,13 +42,12 @@ const DestinationSearch = props => {
   }, [originPlace, destinationPlace]);
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.autocompleteContainer, {zIndex: clicked ? 1 : 0}]}>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.autocompleteContainer}>
         <GooglePlacesAutocomplete
           placeholder="Where from?"
           onPress={(data, details = null) => {
             setOriginPlace({data, details});
-            setClicked(!clicked);
           }}
           enablePoweredByContainer={false}
           suppressDefaultStyles
@@ -70,27 +69,26 @@ const DestinationSearch = props => {
           // predefinedPlaces={[homePlace, workPlace]}
         />
       </View>
-      {/* <GooglePlacesAutocomplete
-          placeholder="Where to?"
-          onPress={(data, details = null) => {
-            setDestinationPlace({data, details});
-          }}
-          enablePoweredByContainer={false}
-          suppressDefaultStyles
-          styles={{
-            textInput: styles.textInput,
-            container: {
-              ...styles.autocompleteContainer,
-            },
-            separator: styles.separator,
-          }}
-          fetchDetails
-          query={{
-            key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y',
-            language: 'en',
-          }}
-          renderRow={data => <PlaceRow data={data} />}
-        /> */}
+      <GooglePlacesAutocomplete
+        placeholder="Where to?"
+        onPress={(data, details = null) => {
+          setDestinationPlace({data, details});
+        }}
+        enablePoweredByContainer={false}
+        suppressDefaultStyles
+        styles={{
+          textInput: styles.textInput,
+
+          listView: styles.listView2,
+          separator: styles.separator,
+        }}
+        fetchDetails
+        query={{
+          key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y',
+          language: 'en',
+        }}
+        renderRow={data => <PlaceRow data={data} />}
+      />
 
       {/* Circle near Origin input */}
       <View style={styles.personpin}>
@@ -116,22 +114,22 @@ const DestinationSearch = props => {
           style={{fontSize: moderateScale(23)}}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(14),
-    position: 'relative',
-    // backgroundColor: 'green',
 
+    //  backgroundColor: 'black',
+    zIndex: 1,
     borderRadius: 10,
     marginTop: 10,
     //backgroundColor: '#fff',
   },
   textInput: {
     padding: 10,
-    //backgroundColor: 'red',
+    //backgroundColor: 'green',
     marginVertical: moderateScale(4),
     marginLeft: moderateScale(24),
   },
@@ -141,17 +139,25 @@ const styles = StyleSheet.create({
     height: 1,
   },
   listView: {
+    marginTop: responsiveHeight(13),
+    height: responsiveHeight(14),
+    backgroundColor: '#eee',
     position: 'absolute',
-    marginTop: responsiveHeight(12),
-    height: responsiveHeight(12),
-    //backgroundColor: '#fff',
+    zIndex: 1,
+  },
+  listView2: {
+    width: responsiveWidth(84),
+    marginTop: responsiveHeight(7),
+    height: responsiveHeight(14),
+    backgroundColor: '#eee',
+    position: 'absolute',
+    zIndex: 1,
   },
   autocompleteContainer: {
-    //backgroundColor: 'red',
     marginTop: responsiveHeight(1),
     marginLeft: responsiveWidth(3),
     marginRight: responsiveWidth(6),
-
+    zIndex: 1,
     height: responsiveHeight(6),
     borderRadius: moderateScale(15),
   },

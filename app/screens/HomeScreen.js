@@ -12,6 +12,7 @@ import {
   Keyboard,
   Platform,
   Image,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {
   responsiveHeight,
@@ -65,6 +66,9 @@ const HomeScreen = () => {
   const _keyboardDidHide = () => {
     setHeightTop(30);
   };
+  const dismissKeyboard = () => {
+    // Dismiss the keyboard
+  };
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -74,7 +78,9 @@ const HomeScreen = () => {
       <ScrollView
         ref={scrollViewRef}
         contentContainerStyle={{flex: 1}}
-        bounces={false}>
+        bounces={false}
+        keyboardShouldPersistTaps="handled" // Add this line
+      >
         <View style={styles.container}>
           <Maps />
           <Image source={require('../assets/images/mapImg.jpeg')} />

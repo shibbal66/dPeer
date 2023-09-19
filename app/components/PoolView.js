@@ -84,8 +84,7 @@ const PoolView = () => {
       {Bottomtab == 0 ? (
         <View
           style={{
-            flex: 1,
-
+            zIndex: 0,
             backgroundColor: '#edebebf5',
             borderRadius: moderateScale(35),
             width: responsiveWidth(88),
@@ -100,8 +99,7 @@ const PoolView = () => {
       ) : (
         <View
           style={{
-            flex: 1,
-
+            zIndex: 0,
             backgroundColor: '#edebebf5',
             borderRadius: moderateScale(35),
           }}>
@@ -118,12 +116,13 @@ const styles = StyleSheet.create({
   bootomSheet: {
     width: responsiveWidth(88),
     height: responsiveHeight(50),
-
+    zIndex: 0,
     backgroundColor: '#eee',
 
     borderRadius: moderateScale(35),
   },
   upperBotm: {
+    zIndex: 0,
     width: responsiveWidth(88),
     alignItems: 'center',
     height: responsiveHeight(8.5),
