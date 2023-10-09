@@ -30,7 +30,7 @@ const OnbordingCenter = props => {
 const styles = StyleSheet.create({
   centerView: {
     width: responsiveWidth(100),
-    height: responsiveHeight(42),
+    height: responsiveHeight(43),
     alignItems: 'center',
     // backgroundColor: 'red',
     justifyContent: 'center',
@@ -55,4 +55,3 @@ const styles = StyleSheet.create({
   },
 });
 export default OnbordingCenter;
-9;

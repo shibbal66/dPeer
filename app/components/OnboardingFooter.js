@@ -65,9 +65,10 @@ const OnboardingFooter = props => {
 const styles = StyleSheet.create({
   FooterBtns: {
     width: responsiveWidth(100),
-    height: responsiveHeight(10),
+    height: responsiveHeight(14),
     flexDirection: 'row-reverse',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    //backgroundColor: 'grey',
 
     justifyContent: 'space-evenly',
   },

@@ -13,7 +13,8 @@ import {
   moderateVerticalScale,
 } from 'react-native-size-matters';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
+import {useNavigation} from '@react-navigation/native';
+import NavigationStrings from '../constants/NavigationStrings';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
@@ -21,6 +22,8 @@ const icon = <FontAwesome6 name={'comments'} />;
 const Tab = createBottomTabNavigator();
 
 const NavBar = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.NavBar}>
       <Pressable
@@ -51,7 +54,7 @@ const NavBar = () => {
       </Pressable>
 
       <Pressable
-        onPress={() => changeText('More')}
+        onPress={() => navigation.navigate(NavigationStrings.PROFILE)}
         style={styles.IconBehaviour}
         android_ripple={{borderless: true, radius: 50}}>
         <AntDesign

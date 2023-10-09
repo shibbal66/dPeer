@@ -26,12 +26,13 @@ const OnboardingText = props => {
 const styles = StyleSheet.create({
   TextView: {
     width: responsiveWidth(100),
-    height: responsiveHeight(20),
+    height: responsiveHeight(18),
     alignItems: 'center',
+    justifyContent: 'center',
     // backgroundColor: 'green',
   },
   confirmYourRide: {
-    top: responsiveWidth(8),
+    // top: responsiveWidth(8),
 
     fontSize: responsiveFontSize(3.8),
     color: 'rgba(0, 0, 0, 0.84)',
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
   },
   withConfirmYourride: {
     width: responsiveWidth(73),
-    top: responsiveWidth(9),
+    //top: responsiveWidth(9),
 
     fontSize: responsiveFontSize(2.5),
     color: 'rgba(0, 0, 0, 0.62)',

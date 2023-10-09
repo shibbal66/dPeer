@@ -11,10 +11,37 @@ import {
   TextInput,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import RegLogo from '../components/RegLogo';
 import {FontSize, FontFamily, FontFamily2} from '../components/GlobalStyles';
-import {connectWallet} from './connectWallet';
+import {connectwallet} from '../components/web3Connect';
 import NavigationStrings from '../constants/NavigationStrings';
-
+import {
+  responsiveHeight,
+  responsiveWidth,
+  responsiveFontSize,
+  useResponsiveHeight,
+} from 'react-native-responsive-dimensions';
+import {
+  scale,
+  verticalScale,
+  moderateScale,
+  moderateVerticalScale,
+} from 'react-native-size-matters';
+import {
+  WalletConnectModal,
+  useWalletConnectModal,
+} from '@walletconnect/modal-react-native';
+const projectId = '9ba81a4162c222bbbcd8743f259fd999';
+const providerMetadata = {
+  name: 'dPeer',
+  description: 'YOUR_PROJECT_DESCRIPTION',
+  url: 'https://your-project-website.com/',
+  icons: ['https://your-project-logo.com/'],
+  redirect: {
+    native: 'YOUR_APP_SCHEME://',
+    universal: 'YOUR_APP_UNIVERSAL_LINK.com',
+  },
+};
 const {width, height} = Dimensions.get('window');
 const countries = [
   {country: 'Lahore', code: '92', iso: 'WF'},
@@ -26,15 +53,25 @@ const Register = () => {
   const [data, setData] = useState(countries);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const {open, isConnected} = useWalletConnectModal();
 
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        style={styles.regpic}
-        source={require('../assets/images/regpic2.png')}
-      />
+      <RegLogo />
+      <View
+        style={{
+          backgroundColor: 'blue',
+          width: responsiveWidth(100),
+          height: responsiveHeight(30),
+        }}>
+        <Image
+          style={styles.regpic}
+          source={require('../assets/images/regpic2.png')}
+        />
+      </View>
+
       <Image
         style={styles.homeloc}
         source={{
@@ -53,93 +90,101 @@ const Register = () => {
           uri: 'https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/r1j2qwozlk-215%3A248?alt=media&token=17e58dc6-86fd-4411-9692-4b5ceca84172',
         }}
       />
-      <Image
-        style={styles.dpeerMainLogo2400x18001}
-        source={require('../assets/images/dpeer-main-logo-2400x1800-1.png')}
-      />
+
       <TouchableOpacity
         onPress={() => navigation.navigate(NavigationStrings.SIGNIN)}>
         <Text style={styles.signInText}>Sign In Now</Text>
       </TouchableOpacity>
-      <Text style={styles.dropText}>Select City</Text>
-      <TouchableOpacity
-        style={styles.dropdownSelector}
-        onPress={() => {
-          setClicked(!clicked);
+      <View
+        style={{
+          // backgroundColor: 'grey',
+          width: responsiveWidth(100),
+          height: responsiveHeight(53),
         }}>
-        <Text style={{fontWeight: '600'}}>
-          {selectedCountry == '' ? 'Select City' : selectedCountry}
-        </Text>
+        <Text style={styles.dropText}>Select City</Text>
+        <TouchableOpacity
+          style={styles.dropdownSelector}
+          onPress={() => {
+            setClicked(!clicked);
+          }}>
+          <Text style={{fontWeight: '600'}}>
+            {selectedCountry == '' ? 'Select City' : selectedCountry}
+          </Text>
+          {clicked ? (
+            <Image
+              source={require('../assets/images/upload.png')}
+              style={styles.icon}
+            />
+          ) : (
+            <Image
+              source={require('../assets/images/dropdown.png')}
+              style={styles.icon}
+            />
+          )}
+        </TouchableOpacity>
         {clicked ? (
-          <Image
-            source={require('../assets/images/upload.png')}
-            style={styles.icon}
-          />
-        ) : (
-          <Image
-            source={require('../assets/images/dropdown.png')}
-            style={styles.icon}
-          />
-        )}
-      </TouchableOpacity>
-      {clicked ? (
-        <View style={[styles.dropdown, {zIndex: clicked ? 1 : 0}]}>
-          <FlatList
-            data={data}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  style={styles.countryItem}
-                  onPress={() => {
-                    setSelectedCountry(item.country);
-                    setClicked(!clicked);
-                  }}>
-                  <Text style={{fontWeight: '400', top: '35%'}}>
-                    {item.country}
-                  </Text>
-                </TouchableOpacity>
-              );
-            }}
+          <View style={[styles.dropdown, {zIndex: clicked ? 1 : 0}]}>
+            <FlatList
+              data={data}
+              renderItem={({item, index}) => {
+                return (
+                  <TouchableOpacity
+                    style={styles.countryItem}
+                    onPress={() => {
+                      setSelectedCountry(item.country);
+                      setClicked(!clicked);
+                    }}>
+                    <Text style={{fontWeight: '400', top: '35%'}}>
+                      {item.country}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              }}
+            />
+          </View>
+        ) : null}
+        <Text style={styles.phoneNumText}>Phone Number</Text>
+        <View style={styles.dropdownSelector}>
+          <TextInput
+            style={styles.phoneNumberInput}
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            keyboardType="phone-pad"
+            placeholder="Enter your phone number"
           />
         </View>
-      ) : null}
-      <Text style={styles.phoneNumText}>Phone Number</Text>
-      <View style={styles.dropdownSelector}>
-        <TextInput
-          style={styles.phoneNumberInput}
-          value={phoneNumber}
-          onChangeText={setPhoneNumber}
-          keyboardType="phone-pad"
-          placeholder="Enter your phone number"
-        />
-      </View>
-      <View style={styles.ContinueBtn}>
-        <TouchableOpacity
-          style={styles.phoneNumberInput}
-          onPress={() => navigation.navigate(NavigationStrings.SIGNIN)}>
+        <View style={styles.ContinueBtn}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(NavigationStrings.SIGNIN)}
-            style={styles.iconPosition}>
-            <Text
-              style={{
-                color: '#ebebeb',
-                fontSize: 23,
-                fontFamily: FontFamily.ponnala,
-                fontWeight: 'bold',
-              }}>
-              Continue
-            </Text>
+            style={styles.phoneNumberInput}
+            onPress={() => navigation.navigate(NavigationStrings.SIGNIN)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(NavigationStrings.SIGNIN)}
+              style={styles.iconPosition}>
+              <Text
+                style={{
+                  color: '#ebebeb',
+                  fontSize: 23,
+                  fontFamily: FontFamily.ponnala,
+                  fontWeight: 'bold',
+                }}>
+                Continue
+              </Text>
+            </TouchableOpacity>
           </TouchableOpacity>
+        </View>
+        <Text style={styles.ContinueText}>Or Continue With</Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={open}>
+          <Image
+            style={styles.logo}
+            source={require('../assets/images/metalogow.png')}
+          />
+          <Text style={styles.buttonText}>Connect to Metamask</Text>
         </TouchableOpacity>
-      </View>
-      <Text style={styles.ContinueText}>Or Continue With</Text>
-      <TouchableOpacity style={styles.buttonContainer} onPress={connectWallet}>
-        <Image
-          style={styles.logo}
-          source={require('../assets/images/metalogow.png')}
+        <WalletConnectModal
+          projectId={projectId}
+          providerMetadata={providerMetadata}
         />
-        <Text style={styles.buttonText}>Connect to Metamask</Text>
-      </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -165,89 +210,82 @@ const styles = StyleSheet.create({
     width: '8%',
     height: '5%',
   },
-  dpeerMainLogo2400x18001: {
-    width: '100%',
-    height: '18%',
-    resizeMode: 'contain',
 
-    position: 'absolute',
-  },
   regpic: {
-    top: '12%',
-    width: '100%',
-    height: '46%',
+    width: responsiveWidth(100),
+    height: responsiveHeight(35),
   },
   homeloc: {
-    top: '30%',
-    width: '7%',
-    left: '37%',
-    height: '20%',
+    width: responsiveWidth(7),
+
+    height: responsiveHeight(22),
+    marginTop: moderateVerticalScale(220),
+    left: moderateScale(140),
     resizeMode: 'contain',
     position: 'absolute',
   },
   homeloc2: {
-    top: '22%',
-    width: '12%',
-    height: '28%',
-    left: '67%',
+    width: responsiveWidth(18),
+    height: responsiveHeight(35),
+    marginTop: moderateVerticalScale(138),
+    left: moderateScale(210),
     resizeMode: 'contain',
     position: 'absolute',
-    marginRight: '5%',
   },
   homeloc3: {
-    top: '33%',
-    width: '6%',
-    height: '28%',
-    left: '75%',
+    width: responsiveWidth(9),
+
+    height: responsiveHeight(20),
+    marginTop: moderateVerticalScale(270),
+    left: moderateScale(295),
     resizeMode: 'contain',
     position: 'absolute',
-    marginRight: '5%',
   },
   signInText: {
-    marginTop: '6%',
-    fontSize: 15,
+    fontSize: responsiveFontSize(2),
     color: 'purple', // Adjust the text color as needed
     fontFamily: FontFamily.ponnala,
     fontWeight: 'bold', // Make the text bold
-    // textDecorationLine: 'underline',
+    textDecorationLine: 'underline',
   },
   dropText: {
-    right: '33%',
-    top: '2%',
+    left: responsiveWidth(8),
+    top: responsiveHeight(2),
     fontFamily: FontFamily.ponnala,
     fontWeight: 'bold', // Make the text bold
     fontSize: 15,
   },
   dropdownSelector: {
-    width: '87%',
-    top: '2%',
-    height: 50,
-    borderRadius: 30,
+    width: responsiveWidth(87),
+    top: responsiveHeight(1),
+    height: responsiveHeight(6),
+    borderRadius: moderateScale(30),
     borderWidth: 0.5,
     borderColor: '#8e8e8e',
     alignSelf: 'center',
-    marginTop: '5%',
+    marginTop: responsiveHeight(2),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
-    outline: 'none',
+    paddingLeft: responsiveWidth(4),
+    paddingRight: responsiveWidth(6),
+
+    //backgroundColor: 'green',
   },
   icon: {
     width: 15,
     height: 15,
   },
   dropdown: {
-    width: '84%',
-    height: '15%',
-    borderRadius: 10,
-    marginTop: 10,
+    width: responsiveWidth(84),
+    height: responsiveHeight(20),
+    borderRadius: moderateScale(10),
+
     backgroundColor: '#fff',
     elevation: 5,
     alignSelf: 'center',
     position: 'absolute',
-    top: '67%',
+    top: responsiveHeight(12),
   },
   countryItem: {
     width: '82%',
@@ -258,8 +296,8 @@ const styles = StyleSheet.create({
     paddingRight: '39%',
   },
   phoneNumText: {
-    right: '29%',
-    top: '3%',
+    top: responsiveHeight(2),
+    left: responsiveWidth(8),
     fontFamily: FontFamily.ponnala,
     fontWeight: 'bold', // Make the text bold
     fontSize: 15,
@@ -281,19 +319,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   ContinueBtn: {
-    width: '84%',
-    height: 50,
-    borderRadius: 10,
+    width: responsiveWidth(80),
+    height: responsiveHeight(6),
+    borderRadius: moderateScale(30),
     borderWidth: 0.5,
     borderColor: '#8e8e8e',
     alignSelf: 'center',
-    marginTop: '5%',
+    marginTop: responsiveHeight(2),
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
-    outline: 'none',
+
     backgroundColor: '#50478f',
   },
   iconPosition: {
@@ -302,34 +337,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   ContinueText: {
-    marginTop: '3%',
-    fontSize: 18,
+    alignSelf: 'center',
+    marginTop: responsiveHeight(3),
+    fontSize: responsiveFontSize(2.1),
     color: 'purple', // Adjust the text color as needed
     fontFamily: FontFamily.ponnala,
     fontWeight: 'bold', // Make the text bold
     // textDecorationLine: 'underline',
   },
   buttonContainer: {
-    width: '84%',
-    height: 55,
-    borderRadius: 10,
+    width: responsiveWidth(80),
+    height: responsiveHeight(6.5),
+    borderRadius: moderateScale(14),
     borderWidth: 0.5,
     borderColor: '#8e8e8e',
     alignSelf: 'center',
-    marginTop: '5%',
+    marginTop: responsiveHeight(2),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 15,
-    outline: 'none',
+    paddingLeft: responsiveWidth(2),
+    paddingRight: responsiveWidth(9),
+
     backgroundColor: '#f08913',
   },
   buttonText: {
     color: '#ebebeb',
-    fontSize: 20,
+    fontSize: responsiveFontSize(2.5),
 
-    right: '58%',
     fontWeight: 'bold',
   },
   logo: {

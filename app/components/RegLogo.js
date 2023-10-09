@@ -12,7 +12,7 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
-const Logo = () => {
+const RegLogo = () => {
   return (
     <View style={styles.logoView}>
       <Image
@@ -30,10 +30,10 @@ const Logo = () => {
 const styles = StyleSheet.create({
   logoView: {
     width: responsiveWidth(100),
-    height: responsiveHeight(20),
+    height: responsiveHeight(12),
     alignItems: 'center',
     justifyContent: 'center',
     // backgroundColor: 'black',
   },
 });
-export default Logo;
+export default RegLogo;

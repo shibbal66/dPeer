@@ -1,5 +1,3 @@
-import {Register} from '../screens';
-
 export default {
   ONBOARDING1: 'Onboarding1',
   ONBOARDING2: 'Onboarding2',
@@ -7,4 +5,6 @@ export default {
   REGISTER: 'Register',
   SIGNIN: 'SignIn',
   HOMESCREEN: 'HomeScreen',
+  PROFILE: 'Profile',
+  // SEARCHRESULT: 'SearchResult',
 };

@@ -69,27 +69,28 @@ const DestinationSearch = props => {
           // predefinedPlaces={[homePlace, workPlace]}
         />
       </View>
-      <GooglePlacesAutocomplete
-        placeholder="Where to?"
-        onPress={(data, details = null) => {
-          setDestinationPlace({data, details});
-        }}
-        enablePoweredByContainer={false}
-        suppressDefaultStyles
-        styles={{
-          textInput: styles.textInput,
+      <View style={styles.autocompleteContainer}>
+        <GooglePlacesAutocomplete
+          placeholder="Where to?"
+          onPress={(data, details = null) => {
+            setDestinationPlace({data, details});
+          }}
+          enablePoweredByContainer={false}
+          suppressDefaultStyles
+          styles={{
+            textInput: styles.textInput,
 
-          listView: styles.listView2,
-          separator: styles.separator,
-        }}
-        fetchDetails
-        query={{
-          key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y',
-          language: 'en',
-        }}
-        renderRow={data => <PlaceRow data={data} />}
-      />
-
+            listView: styles.listView2,
+            separator: styles.separator,
+          }}
+          fetchDetails
+          query={{
+            key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y',
+            language: 'en',
+          }}
+          renderRow={data => <PlaceRow data={data} />}
+        />
+      </View>
       {/* Circle near Origin input */}
       <View style={styles.personpin}>
         <MaterialIcons
@@ -101,9 +102,7 @@ const DestinationSearch = props => {
         />
       </View>
 
-      {/* Line between dots */}
       <View style={styles.line} />
-
       {/* Square near Destination input */}
       <View style={styles.locationpin}>
         <MaterialIcons
@@ -120,18 +119,18 @@ const DestinationSearch = props => {
 const styles = StyleSheet.create({
   container: {
     height: responsiveHeight(14),
+    width: responsiveWidth(94),
+    // backgroundColor: 'red',
 
-    //  backgroundColor: 'black',
-    zIndex: 1,
     borderRadius: 10,
     marginTop: 10,
     //backgroundColor: '#fff',
   },
   textInput: {
-    padding: 10,
-    //backgroundColor: 'green',
+    padding: moderateScale(7),
+    // backgroundColor: 'green',
     marginVertical: moderateScale(4),
-    marginLeft: moderateScale(24),
+    marginLeft: moderateScale(10),
   },
 
   separator: {
@@ -139,45 +138,48 @@ const styles = StyleSheet.create({
     height: 1,
   },
   listView: {
-    marginTop: responsiveHeight(13),
-    height: responsiveHeight(14),
-    backgroundColor: '#eee',
-    position: 'absolute',
-    zIndex: 1,
+    marginTop: responsiveHeight(8),
+
+    height: responsiveHeight(32),
+    // backgroundColor: '#eee',
+    // position: 'absolute',
+    width: responsiveWidth(87),
+    //backgroundColor: 'yellow',
   },
   listView2: {
-    width: responsiveWidth(84),
+    width: responsiveWidth(83),
     marginTop: responsiveHeight(7),
-    height: responsiveHeight(14),
-    backgroundColor: '#eee',
+    height: responsiveHeight(30),
+    // backgroundColor: 'blue',
     position: 'absolute',
-    zIndex: 1,
+    //backgroundColor: 'blue',
   },
   autocompleteContainer: {
     marginTop: responsiveHeight(1),
-    marginLeft: responsiveWidth(3),
+    marginLeft: responsiveWidth(6),
     marginRight: responsiveWidth(6),
-    zIndex: 1,
+    width: responsiveWidth(84),
     height: responsiveHeight(6),
     borderRadius: moderateScale(15),
+    // backgroundColor: 'blue',
   },
 
   personpin: {
     position: 'absolute',
-    marginTop: responsiveHeight(2.2),
-    marginLeft: responsiveWidth(1.8),
+    marginTop: responsiveHeight(1.8),
+    marginLeft: responsiveWidth(1.7),
   },
   line: {
-    width: 1,
-    height: responsiveHeight(3.7),
+    width: responsiveWidth(0.4),
+    height: responsiveHeight(3),
     backgroundColor: 'grey',
     position: 'absolute',
-    top: responsiveHeight(5.9),
-    left: responsiveWidth(4.4),
+    marginTop: responsiveHeight(5.9),
+    marginLeft: responsiveWidth(4.8),
   },
   locationpin: {
     position: 'absolute',
-    marginTop: responsiveHeight(8.7),
+    marginTop: responsiveHeight(9.4),
     marginLeft: responsiveWidth(1.8),
   },
 });

@@ -66,6 +66,12 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+  <string>metamask</string>
+  <string>trust</string>
+ 
+</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

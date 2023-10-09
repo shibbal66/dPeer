@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     marginVertical: responsiveHeight(0.2),
     //position: 'absolute',
     // backgroundColor: 'red',
+    width: responsiveWidth(100),
   },
   iconContainer: {
     backgroundColor: 'white',
