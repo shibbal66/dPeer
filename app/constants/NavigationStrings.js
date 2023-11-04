@@ -6,5 +6,6 @@ export default {
   SIGNIN: 'SignIn',
   HOMESCREEN: 'HomeScreen',
   PROFILE: 'Profile',
-  // SEARCHRESULT: 'SearchResult',
+  MYTRIPS: 'MyTrips',
+  CHOOSELOCATION: 'ChooseLocation',
 };

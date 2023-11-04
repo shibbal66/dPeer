@@ -16,11 +16,11 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y" />
-      <queries>
+      <!-- <queries>
             <package android:name="io.metamask"/>
             <package android:name="com.wallet.crypto.trustapp"/>
             
-        </queries>
+        </queries> -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

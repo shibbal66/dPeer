@@ -40,7 +40,7 @@ const NavBar = () => {
         <Text style={styles.IconText}>Home</Text>
       </Pressable>
       <Pressable
-        onPress={() => changeText('Trips')}
+        onPress={() => navigation.navigate(NavigationStrings.MYTRIPS)}
         style={styles.IconBehaviour}
         android_ripple={{borderless: true, radius: 50}}>
         <AntDesign

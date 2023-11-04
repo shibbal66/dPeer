@@ -15,7 +15,7 @@ const WhereTo = props => {
   const navigation = useNavigation();
 
   const goToSearch = () => {
-    navigation.navigate(NavigationStrings.SEARCHRESULT);
+    navigation.navigate(NavigationStrings.WHERETO);
   };
 
   return (
@@ -23,28 +23,7 @@ const WhereTo = props => {
       {/*  Input Box */}
       <Pressable style={styles.inputBox} onPress={goToSearch}>
         <Text style={styles.inputText}>Where To?</Text>
-
-        {/* <View style={styles.timeContainer}>
-          <AntDesign name={'clockcircle'} size={16} color={'#535353'} />
-          <Text>Now</Text>
-          <MaterialIcons name={'keyboard-arrow-down'} size={16} />
-        </View> */}
       </Pressable>
-
-      {/* <View style={styles.row}>
-        <View style={styles.iconContainer}>
-          <AntDesign name={'clockcircle'} size={20} color={'#ffffff'} />
-        </View>
-        <Text style={styles.destinationText}>Spin Nightclub</Text>
-      </View>
-
-      {/* Home destination */}
-      {/* <View style={styles.row}>
-        <View style={[styles.iconContainer, {backgroundColor: '#218cff'}]}>
-          <Entypo name={'home'} size={20} color={'#ffffff'} />
-        </View>
-        <Text style={styles.destinationText}>Spin Nightclub</Text>
-      </View>  */}
     </View>
   );
 };
@@ -64,14 +43,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#434343',
   },
-  timeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 100,
-    padding: 10,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-  },
 
   row: {
     flexDirection: 'row',
@@ -79,16 +50,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1,
     borderColor: '#dbdbdb',
-  },
-  iconContainer: {
-    backgroundColor: '#b3b3b3',
-    padding: 10,
-    borderRadius: 25,
-  },
-  destinationText: {
-    marginLeft: 10,
-    fontWeight: '500',
-    fontSize: 16,
   },
 });
 export default WhereTo;

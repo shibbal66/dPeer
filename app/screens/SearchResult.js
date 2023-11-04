@@ -2,7 +2,11 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import ChooseLocation from '../components/ChooseLocation';
 import {moderateScale} from 'react-native-size-matters';
+import {useNavigation} from '@react-navigation/native';
+import NavigationStrings from '../constants/NavigationStrings';
 const SearchResult = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <ChooseLocation />

@@ -34,7 +34,11 @@ const Profile = () => {
           <TouchableOpacity
             onPress={() => navigation.navigate(NavigationStrings.HOMESCREEN)}>
             <Image
-              style={{width: responsiveWidth(16), height: responsiveWidth(18)}}
+              style={{
+                width: responsiveWidth(12),
+                height: responsiveWidth(12),
+                marginLeft: responsiveWidth(5),
+              }}
               resizeMode="contain"
               source={require('../assets/images/goBack.png')}
             />
@@ -43,56 +47,94 @@ const Profile = () => {
         </View>
       </View>
       <View style={styles.bottomView}>
-        <View style={styles.tabView}>
-          <Image
-            style={{
-              width: responsiveWidth(22),
-              height: responsiveWidth(16),
-            }}
-            resizeMode="contain"
-            source={require('../assets/images/Wallet.png')}
-          />
-        </View>
-        <View style={styles.tabView}>
-          <Image
-            style={{
-              width: responsiveWidth(21),
-              height: responsiveWidth(14),
-            }}
-            resizeMode="contain"
-            source={require('../assets/images/Registration.png')}
-          />
-        </View>
-        <View style={styles.tabView}>
-          <Image
-            style={{
-              width: responsiveWidth(21),
-              height: responsiveWidth(14),
-            }}
-            resizeMode="contain"
-            source={require('../assets/images/Language.png')}
-          />
-        </View>
-        <View style={styles.tabView}>
-          <Image
-            style={{
-              width: responsiveWidth(21),
-              height: responsiveWidth(15),
-            }}
-            resizeMode="contain"
-            source={require('../assets/images/Security.png')}
-          />
-        </View>
-        <View style={styles.tabView}>
-          <Image
-            style={{
-              width: responsiveWidth(20),
-              height: responsiveWidth(14),
-            }}
-            resizeMode="contain"
-            source={require('../assets/images/Help.png')}
-          />
-        </View>
+        <TouchableOpacity>
+          <View style={styles.tabView}>
+            <Image
+              style={{
+                width: responsiveWidth(10),
+                height: responsiveWidth(10),
+              }}
+              resizeMode="contain"
+              source={require('../assets/images/Wallet.png')}
+            />
+            <Text style={styles.text1}>My Wallet</Text>
+            <Text style={styles.text2}>Securely Manage your Funds</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.tabView}>
+            <Image
+              style={{
+                width: responsiveWidth(10),
+                height: responsiveWidth(10),
+              }}
+              resizeMode="contain"
+              source={require('../assets/images/Registration.png')}
+            />
+            <Text style={styles.text1}>My Account</Text>
+            <Text
+              style={{
+                marginTop: responsiveHeight(4.5),
+                marginLeft: -responsiveWidth(26),
+              }}>
+              Edit Account Information
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.tabView}>
+            <Image
+              style={{
+                width: responsiveWidth(10),
+                height: responsiveWidth(10),
+              }}
+              resizeMode="contain"
+              source={require('../assets/images/Security.png')}
+            />
+            <Text style={styles.text1}>Privacy & Policy</Text>
+            <Text
+              style={{
+                marginTop: responsiveHeight(4.5),
+                marginLeft: -responsiveWidth(35),
+              }}>
+              Learn How we Protect Your Privacy
+            </Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.tabView}>
+            <Image
+              style={{
+                width: responsiveWidth(10),
+                height: responsiveWidth(10),
+              }}
+              resizeMode="contain"
+              source={require('../assets/images/Language.png')}
+            />
+            <Text style={styles.text1}>Language</Text>
+            <Text style={styles.text2}>Choose Your Preferred Language</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <View style={styles.tabView}>
+            <Image
+              style={{
+                width: responsiveWidth(10),
+                height: responsiveWidth(10),
+              }}
+              resizeMode="contain"
+              source={require('../assets/images/Help.png')}
+            />
+            <Text style={styles.text1}>Help</Text>
+            <Text
+              style={{
+                marginTop: responsiveHeight(4.5),
+                marginLeft: -responsiveWidth(11),
+              }}>
+              Get Assistance When You Need It
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -114,14 +156,27 @@ const styles = StyleSheet.create({
     width: responsiveWidth(100),
     height: responsiveHeight(65),
     borderRadius: moderateScale(35),
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     padding: moderateScale(25),
   },
   tabView: {
-    backgroundColor: 'red',
+    flexDirection: 'row',
+    // backgroundColor: 'red',
     paddingHorizontal: responsiveWidth(2),
-    paddingVertical: responsiveHeight(2),
+    paddingVertical: responsiveHeight(1),
     width: responsiveWidth(90),
     height: responsiveHeight(10),
+    borderRadius: moderateScale(15),
+    alignItems: 'center',
+  },
+  text1: {
+    fontSize: responsiveFontSize(2.4),
+    marginBottom: responsiveHeight(1.5),
+    fontWeight: '600',
+    marginLeft: responsiveWidth(4),
+  },
+  text2: {
+    marginTop: responsiveHeight(4.5),
+    marginLeft: -responsiveWidth(22),
   },
 });

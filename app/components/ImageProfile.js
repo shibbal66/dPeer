@@ -25,7 +25,7 @@ const ImageProfile = () => {
         source={require('../assets/images/profile3.png')}
       />
       <View style={styles.TextView}>
-        <Text style={styles.TextStyle}>Shibbal Farooq</Text>
+        <Text style={styles.TextStyle}>Shibbal</Text>
       </View>
       <Image
         style={styles.rating}
@@ -65,9 +65,11 @@ const styles = StyleSheet.create({
     width: responsiveWidth(28), // Adjust the width of the second image as per your requirement
     height: responsiveWidth(28),
     alignSelf: 'center',
-    top: responsiveHeight(13),
+    top: responsiveHeight(14),
   },
-  TextView: {},
+  TextView: {
+    marginTop: responsiveHeight(1),
+  },
   TextStyle: {
     fontSize: responsiveFontSize(2.5),
     fontWeight: '500',

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   StyleSheet,
   View,
@@ -19,12 +19,12 @@ import {
 const Maps = () => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y';
   const origin = {
-    latitude: 30.230722255105633,
-    longitude: 71.5174780752946,
+    latitude: 31.40349,
+    longitude: 74.235468,
   };
   const destination = {
-    latitude: 30.230722255605633,
-    longitude: 71.5174780742946,
+    latitude: 31.46411802593727,
+    longitude: 74.4119759443327,
   };
   const [mLat, setmLat] = useState(0);
   const [mLong, setmLong] = useState(0);
@@ -82,35 +82,62 @@ const Maps = () => {
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
   };
+  const mapRef = useRef(null);
   return (
     <MapView
       style={{width: responsiveWidth(100), height: responsiveHeight(38)}}
       provider={PROVIDER_GOOGLE}
       initialRegion={{
-        latitude: 30.230722255105633,
-        longitude: 71.5174780752946,
+        latitude: 31.40349,
+        longitude: 74.235468,
         latitudeDelta: 0.5,
         longitudeDelta: 0.4,
       }}
       zoomEnabled={true}
-      showsUserLocation={true}
+      showsCompass={true}
       showsMyLocationButton={true}>
       <Marker
         coordinate={{
-          latitude: 30.230722255105633,
-          longitude: 71.5174780752946,
+          latitude: 31.40349,
+          longitude: 74.235468,
         }}>
         <Image
           style={{width: 50, height: 50, resizeMode: 'contain'}}
-          source={require('../assets/images/topcar2.png')}
+          source={require('../assets/images/Oval.png')}
         />
       </Marker>
+      <Marker coordinate={destination}>
+        <Image
+          style={{width: 50, height: 50, resizeMode: 'contain'}}
+          source={require('../assets/images/greenMarker.png')}
+        />
+      </Marker>
+      <Marker
+        coordinate={{
+          latitude: 31.409444371764852,
+          longitude: 74.22706090446684,
+        }}
+      />
       <MapViewDirections
         origin={origin}
         destination={destination}
         apikey={GOOGLE_MAPS_APIKEY}
         strokeWidth={4}
         strokeColor="purple"
+        optimizeWaypoints={true}
+        // waypoints={['31.4204,74.2587']}
+        onReady={result => {
+          if (mapRef.current) {
+            mapRef.current.fitToCoordinates(result.coordinates, {
+              edgePadding: {
+                right: 30,
+                bottom: 30, // Adjusted to make the destination more visible
+                left: 30, // Adjusted to make the origin more visible
+                top: 30,
+              },
+            });
+          }
+        }}
       />
     </MapView>
   );
