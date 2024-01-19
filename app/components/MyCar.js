@@ -19,7 +19,7 @@ const MyCar = () => {
           <Text style={styles.CarText}>Bike</Text>
         </View>
         <View>
-          <Text style={styles.DetailText}>Honda Civic</Text>
+          <Text style={styles.DetailText}>Honda Bullet </Text>
           <Text style={styles.DetailText1}>LEX 1234</Text>
         </View>
       </View>

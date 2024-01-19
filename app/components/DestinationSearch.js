@@ -66,39 +66,56 @@ const DestinationSearch = ({placheholderText, fetchAddress}) => {
   // }, [originPlace, destinationPlace]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.autocompleteContainer}>
-        <GooglePlacesAutocomplete
-          placeholder={placheholderText}
-          onPress={onPressAddress}
-          fetchDetails={true}
-          enablePoweredByContainer={false}
-          suppressDefaultStyles
-          currentLocation={true}
-          // currentLocationLabel="Current location"
-          styles={{
-            textInput: styles.textInput,
+    // <SafeAreaView style={styles.container}>
+    <View style={styles.autocompleteContainer}>
+      <GooglePlacesAutocomplete
+        placeholder={placheholderText}
+        onPress={onPressAddress}
+        fetchDetails={true}
+        enablePoweredByContainer={false}
+        suppressDefaultStyles
+        currentLocation={true}
+        // currentLocationLabel="Current location"
+        styles={{
+          textInput: styles.textInput,
 
-            listView: styles.listView,
-            separator: styles.separator,
-          }}
-          query={{
-            key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y',
-            language: 'en',
-          }}
-          renderRow={data => <PlaceRow data={data} />}
-          renderDescription={data => data.description || data.vicinity}
-          // predefinedPlaces={[homePlace, workPlace]}
-        />
-      </View>
-    </SafeAreaView>
+          listView: styles.listView,
+          separator: styles.separator,
+        }}
+        // query={{
+        //   key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y',
+        //   language: 'en',
+        // }}
+        query={{
+          key: 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y', // Replace with your Google Maps API key
+          language: 'en',
+          location: '31.51327943796107, 74.38381542677314', // Replace with the latitude and longitude of your specific area
+          radius: 30000, // Adjust the radius (in meters) as needed
+        }}
+        renderRow={data => <PlaceRow data={data} />}
+        renderDescription={data => data.description || data.vicinity}
+        // predefinedPlaces={[homePlace, workPlace]}
+      />
+    </View>
+    //</SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    height: responsiveHeight(99),
+    width: responsiveWidth(94),
+    backgroundColor: 'red',
+
+    //backgroundColor: 'black',
+    zIndex: 1,
+    borderRadius: 10,
+    marginTop: 60,
+    //position: 'absolute',
+  },
   textInput: {
     padding: moderateScale(7),
-    // backgroundColor: 'green',
-    marginVertical: moderateScale(4),
+    //backgroundColor: 'green',
+    marginVertical: moderateScale(1),
     marginLeft: moderateScale(10),
   },
 
@@ -117,7 +134,7 @@ const styles = StyleSheet.create({
   },
   listView2: {
     width: responsiveWidth(83),
-    marginTop: responsiveHeight(7),
+    marginTop: responsiveHeight(8),
     height: responsiveHeight(30),
     // backgroundColor: 'blue',
     position: 'absolute',

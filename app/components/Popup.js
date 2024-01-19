@@ -56,7 +56,7 @@ const ModalPoup = ({visible, children}) => {
 };
 
 const Popup = () => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(true);
   return (
     <View
       style={{
@@ -131,7 +131,7 @@ const Popup = () => {
 
         {/* </View> */}
       </ModalPoup>
-      <Button title="Open Modal" onPress={() => setVisible(true)} />
+      {/* <Button title="Open Modal" onPress={() => setVisible(true)} /> */}
     </View>
   );
 };

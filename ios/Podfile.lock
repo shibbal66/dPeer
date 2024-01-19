@@ -399,7 +399,7 @@ PODS:
   - React-jsinspector (0.72.4)
   - React-logger (0.72.4):
     - glog
-  - react-native-geolocation (3.1.0):
+  - react-native-flipper (0.212.0):
     - React-Core
   - react-native-geolocation-service (5.3.1):
     - React
@@ -543,6 +543,42 @@ PODS:
   - RNVectorIcons (10.0.0):
     - React-Core
   - SocketRocket (0.6.1)
+  - Stripe (23.18.0):
+    - StripeApplePay (= 23.18.0)
+    - StripeCore (= 23.18.0)
+    - StripePayments (= 23.18.0)
+    - StripePaymentsUI (= 23.18.0)
+    - StripeUICore (= 23.18.0)
+  - stripe-react-native (0.35.0):
+    - React-Core
+    - Stripe (~> 23.18.0)
+    - StripeApplePay (~> 23.18.0)
+    - StripeFinancialConnections (~> 23.18.0)
+    - StripePayments (~> 23.18.0)
+    - StripePaymentSheet (~> 23.18.0)
+    - StripePaymentsUI (~> 23.18.0)
+  - StripeApplePay (23.18.0):
+    - StripeCore (= 23.18.0)
+  - StripeCore (23.18.0)
+  - StripeFinancialConnections (23.18.0):
+    - StripeCore (= 23.18.0)
+    - StripeUICore (= 23.18.0)
+  - StripePayments (23.18.0):
+    - StripeCore (= 23.18.0)
+    - StripePayments/Stripe3DS2 (= 23.18.0)
+  - StripePayments/Stripe3DS2 (23.18.0):
+    - StripeCore (= 23.18.0)
+  - StripePaymentSheet (23.18.0):
+    - StripeApplePay (= 23.18.0)
+    - StripeCore (= 23.18.0)
+    - StripePayments (= 23.18.0)
+    - StripePaymentsUI (= 23.18.0)
+  - StripePaymentsUI (23.18.0):
+    - StripeCore (= 23.18.0)
+    - StripePayments (= 23.18.0)
+    - StripeUICore (= 23.18.0)
+  - StripeUICore (23.18.0):
+    - StripeCore (= 23.18.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -594,7 +630,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
-  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-get-random-values (from `../node_modules/react-native-get-random-values`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
@@ -626,6 +662,7 @@ DEPENDENCIES:
   - RNScrypt (from `../node_modules/react-native-scrypt`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - "stripe-react-native (from `../node_modules/@stripe/stripe-react-native`)"
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -644,6 +681,14 @@ SPEC REPOS:
     - libevent
     - OpenSSL-Universal
     - SocketRocket
+    - Stripe
+    - StripeApplePay
+    - StripeCore
+    - StripeFinancialConnections
+    - StripePayments
+    - StripePaymentSheet
+    - StripePaymentsUI
+    - StripeUICore
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -693,8 +738,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   React-logger:
     :path: "../node_modules/react-native/ReactCommon/logger"
-  react-native-geolocation:
-    :path: "../node_modules/@react-native-community/geolocation"
+  react-native-flipper:
+    :path: "../node_modules/react-native-flipper"
   react-native-geolocation-service:
     :path: "../node_modules/react-native-geolocation-service"
   react-native-get-random-values:
@@ -757,6 +802,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  stripe-react-native:
+    :path: "../node_modules/@stripe/stripe-react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -801,7 +848,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: c7f826e40fa9cab5d37cab6130b1af237332b594
   React-jsinspector: aaed4cf551c4a1c98092436518c2d267b13a673f
   React-logger: da1ebe05ae06eb6db4b162202faeafac4b435e77
-  react-native-geolocation: ef66fb798d96284c6043f0b16c15d9d1d4955db4
+  react-native-flipper: 9c1957af24b76493ba74f46d000a5c1d485e7731
   react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-get-random-values: dee677497c6a740b71e5612e8dbd83e7539ed5bb
   react-native-google-maps: dd12cdd86b8e3fedbbb671676aedaa2f656e2ccd
@@ -834,9 +881,18 @@ SPEC CHECKSUMS:
   RNSVG: d00c8f91c3cbf6d476451313a18f04d220d4f396
   RNVectorIcons: 8b5bb0fa61d54cd2020af4f24a51841ce365c7e9
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
+  Stripe: 4092bc51f41ca1758166aef921aa0dd2f0fbc639
+  stripe-react-native: 2e2dad1734c1c2b71564b66bae4395bfd8419af4
+  StripeApplePay: aedbcb53f5324d527a52a5888bd0eeee25b3ca36
+  StripeCore: f86db23fb3f984808e6f5d3876397b953bf58a52
+  StripeFinancialConnections: 0aaddb3593a7cc76b5f01eab185f16ef60798b15
+  StripePayments: 050a2c5e2cc6f9492d80fddbc9bb3e7d00ddb0c8
+  StripePaymentSheet: 7a1e68dacbd280bb67ff299a9f9e3337710bbcaf
+  StripePaymentsUI: cec7249a59f0031050cb08e1bf27cad30654d73c
+  StripeUICore: 1b23b5c211091c3675f1cc446df9c14f8836630a
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 04550535833a32563aed02b438001e9c1c2d0eac
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.0

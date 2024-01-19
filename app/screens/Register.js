@@ -62,7 +62,6 @@ const Register = () => {
   const [clicked, setClicked] = useState(false);
   const [data, setData] = useState(countries);
   const [city, setcity] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const {open, isConnected} = useWalletConnectModal();
   const [email, setEmail] = useState('');
   const {connect} = useWeb3Modal();
@@ -159,7 +158,7 @@ const Register = () => {
       /> */}
 
         <TouchableOpacity
-          onPress={() => navigation.navigate(NavigationStrings.SIGNIN)}>
+          onPress={() => navigation.navigate(NavigationStrings.HOMESCREEN)}>
           <Text style={styles.signInText}>Sign In Now</Text>
         </TouchableOpacity>
         <View
@@ -246,8 +245,7 @@ const Register = () => {
               if (isConnected) {
                 navigation.navigate(NavigationStrings.HOMESCREEN);
               } else {
-                //open();
-                navigation.navigate(NavigationStrings.HOMESCREEN);
+                open();
               }
             }}>
             <Image
@@ -290,7 +288,7 @@ const styles = StyleSheet.create({
 
   regpic: {
     width: responsiveWidth(100),
-    height: responsiveHeight(35),
+    height: responsiveHeight(40),
   },
   homeloc: {
     width: responsiveWidth(7),
@@ -324,6 +322,8 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.ponnala,
     fontWeight: 'bold', // Make the text bold
     textDecorationLine: 'underline',
+    marginTop: responsiveHeight(6),
+    alignSelf: 'center',
   },
   dropText: {
     left: responsiveWidth(8),

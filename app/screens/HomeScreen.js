@@ -4,15 +4,15 @@ import {
   StyleSheet,
   Text,
   View,
-  PermissionsAndroid,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableWithoutFeedback,
+  PermissionsAndroid,
   Platform,
   Image,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/dist/MaterialIcons';
@@ -21,13 +21,15 @@ import Button from '../components/Button';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStrings from '../constants/NavigationStrings';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import MapViewDirections from 'react-native-maps-directions';
+import {locationPermission, getCurrentLocation} from '../helper/helperFunction';
 import {
   responsiveHeight,
   responsiveWidth,
   responsiveFontSize,
   useResponsiveHeight,
 } from 'react-native-responsive-dimensions';
+
 import {
   scale,
   verticalScale,
@@ -44,9 +46,101 @@ import Maps from '../components/Maps';
 import DateTimePick from '../components/DateTimePick';
 import WhereTo from '../screens/WhereTo';
 import MyCar from '../components/MyCar';
+import Popup from '../components/Popup';
 const Tab = createBottomTabNavigator();
 
 const HomeScreen = ({navigation}) => {
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyAil4JimP2Tu2dVjgAFOX3A_dNre9d1W5Y';
+
+  useEffect(() => {
+    getLiveLocation();
+  }, []);
+  const getLiveLocation = async () => {
+    const locPermissionDenied = await locationPermission();
+    if (locPermissionDenied) {
+      const {latitude, longitude, heading} = await getCurrentLocation();
+      console.log('get live location after 4 second', heading);
+      animate(latitude, longitude);
+      updateState({
+        heading: heading,
+        curLoc: {latitude, longitude},
+        coordinate: new AnimatedRegion({
+          latitude: latitude,
+          longitude: longitude,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
+        }),
+      });
+      console.log('location h re', res);
+    }
+  };
+  const origin = {
+    latitude: 31.40349,
+    longitude: 74.235468,
+  };
+  const destination = {
+    latitude: 31.46411802593727,
+    longitude: 74.4119759443327,
+  };
+  const [mLat, setmLat] = useState(0);
+  const [mLong, setmLong] = useState(0);
+  const [screenText, setScreenText] = useState('Press a button');
+  const [Bottomtab, setBottomTab] = useState(0);
+  const [showPopup, setShowPopup] = useState(true); // State variable for Popup visibility
+
+  const changeText = text => {
+    console.log(text + ' has been pressed');
+    setScreenText(text);
+  };
+  useEffect(() => {
+    requestCameraPermission();
+  }, []);
+  const requestCameraPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Cool Photo App Camera Permission',
+          message:
+            'Cool Photo App needs access to your camera ' +
+            'so you can take awesome pictures.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can use the Location');
+      } else {
+        console.log('Location permission denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      requestCameraPermission();
+    } else {
+      Geolocation.requestAuthorization();
+    }
+  }, []);
+
+  // const getLocation = () => {
+  //   Geolocation.getCurrentPosition(
+  //     position => {
+  //       console.log(position);
+  //       setmLat(position.coords.latitude);
+  //       setmLong(position.coords.longitude);
+  //     },
+  //     error => {
+  //       // See error code charts below.
+  //       console.log(error.code, error.message);
+  //     },
+  //     {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+  //   );
+  // };
+  const mapRef = useRef(null);
   const [state, setstate] = useState({
     startingCords: {
       latitude: 0,
@@ -58,17 +152,25 @@ const HomeScreen = ({navigation}) => {
     },
   });
   const {startingCords, destinationCords} = state;
-  const [Bottomtab, setBottomTab] = useState(0);
 
   const goToSearch = () => {
     navigation.navigate(NavigationStrings.CHOOSELOCATION, {
       getCordinates: fetchValue,
     });
   };
-  //const Tab = createBottomTabNavigator();
+  const handleFindPoolPress = () => {
+    navigation.navigate(NavigationStrings.FINDINGPOOL);
+  };
 
+  //const Tab = createBottomTabNavigator();
+  const handleFindpool = () => {
+    {
+    }
+    console.warn('shibbal');
+  };
   const fetchValue = data => {
     setstate({
+      ...state,
       startingCords: {
         latitude: data.pickupCords.latitude,
         longitude: data.pickupCords.longitude,
@@ -83,33 +185,6 @@ const HomeScreen = ({navigation}) => {
   const [heightTop, setHeightTop] = useState(260);
   const scrollViewRef = useRef(null);
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      _keyboardDidShow,
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      _keyboardDidHide,
-    );
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
-
-  const _keyboardDidShow = () => {
-    scrollViewRef.current.scrollTo({y: 220, animated: true});
-    setHeightTop(260);
-  };
-
-  const _keyboardDidHide = () => {
-    setHeightTop(30);
-  };
-  const dismissKeyboard = () => {
-    // Dismiss the keyboard
-  };
   return (
     <KeyboardAvoidingView
       style={{flex: 1}}
@@ -123,8 +198,80 @@ const HomeScreen = ({navigation}) => {
         keyboardShouldPersistTaps="handled" // Add this line
       >
         <View style={styles.container}>
-          <Maps />
-          <Image source={require('../assets/images/mapImg.jpeg')} />
+          <MapView
+            ref={mapRef}
+            style={{width: responsiveWidth(100), height: responsiveHeight(38)}}
+            provider={PROVIDER_GOOGLE}
+            initialRegion={{
+              latitude: 31.40349,
+              longitude: 74.235468,
+              latitudeDelta: 0.5,
+              longitudeDelta: 0.4,
+            }}
+            zoomEnabled={true}
+            showsCompass={true}
+            showsMyLocationButton={true}>
+            <Marker coordinate={startingCords}>
+              <Image
+                style={{width: 50, height: 50, resizeMode: 'contain'}}
+                source={require('../assets/images/topcar2.png')}
+              />
+            </Marker>
+            {Object.keys(destination).length > 0 && (
+              <Marker coordinate={startingCords}>
+                <Image
+                  style={{width: 50, height: 50, resizeMode: 'contain'}}
+                  source={require('../assets/images/greenMarker.png')}
+                />
+              </Marker>
+            )}
+            <Marker coordinate={destination} />
+            <Marker
+              coordinate={startingCords}
+              title="Starting Point"
+              description="Your starting location">
+              <Image
+                style={{width: 50, height: 50, resizeMode: 'contain'}}
+                source={require('../assets/images/topcar2.png')}
+              />
+            </Marker>
+            {/* <Marker
+              coordinate={destination}
+              title="Ending Point"
+              description="Your destination location">
+              <Image
+                style={{width: 50, height: 50, resizeMode: 'contain'}}
+                source={require('../assets/images/Oval.png')}
+              />
+            </Marker> */}
+
+            {Object.keys(destinationCords).length > 0 && (
+              <MapViewDirections
+                origin={startingCords}
+                destination={destinationCords}
+                apikey={GOOGLE_MAPS_APIKEY}
+                strokeWidth={4}
+                strokeColor="#50478f"
+                optimizeWaypoints={true}
+                // waypoints={['31.4204,74.2587']}
+                onReady={result => {
+                  // console.log(`Distance: ${result.distance} km`);
+                  // console.log(`Duration: ${result.duration} min.`);
+                  mapRef.current.fitToCoordinates(result.coordinates, {
+                    edgePadding: {
+                      right: 30,
+                      bottom: 200,
+                      left: 40,
+                      top: 100,
+                    },
+                    animated: true, // You can set animated to false if you don't want a smooth animation
+                    zoom: 7,
+                  });
+                }}
+              />
+            )}
+          </MapView>
+          <Image source={require('../assets/images/mapimg.png')} />
           <View style={styles.ViewPool}>
             <View style={styles.bootomSheet}>
               <View style={styles.upperBotm}>
@@ -199,12 +346,18 @@ const HomeScreen = ({navigation}) => {
                   <View>
                     {/*  Input Box */}
                     <Pressable style={styles.inputBox} onPress={goToSearch}>
-                      <Text style={styles.inputText}>Where To?</Text>
+                      <Text style={styles.inputText}>
+                        {destinationCords.latitude && destinationCords.longitude
+                          ? 'Now Choose Date & Time'
+                          : 'Where To?'}
+                      </Text>
                     </Pressable>
                   </View>
                   <DateTimePick />
-
-                  <Button text={'Find Pool'} />
+                  {/* {showPopup && <Popup />} */}
+                  <View style={{marginTop: responsiveHeight(4)}}>
+                    <Button text="Find Pool" handleFunc={handleFindPoolPress} />
+                  </View>
                 </View>
               ) : (
                 <View
@@ -215,10 +368,20 @@ const HomeScreen = ({navigation}) => {
                   }}>
                   {/* <CarTypes /> */}
                   <MyCar />
-                  <WhereTo />
+                  <View>
+                    {/*  Input Box */}
+                    <Pressable style={styles.inputBox} onPress={goToSearch}>
+                      <Text style={styles.inputText}>
+                        {destinationCords.latitude && destinationCords.longitude
+                          ? 'Now Choose Date & Time'
+                          : 'Where To?'}
+                      </Text>
+                    </Pressable>
+                  </View>
                   <DateTimePick />
-
-                  <Button text={'Offer Pool'} />
+                  <View style={{marginTop: responsiveHeight(4)}}>
+                    <Button text={'Offer Pool'} handlefunc={handleFindpool} />
+                  </View>
                 </View>
               )}
             </View>
@@ -236,6 +399,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
 
+    alignItems: 'center',
+    position: 'relative',
+  },
+  Mapscontainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
   },
@@ -276,7 +445,7 @@ const styles = StyleSheet.create({
   },
   inputText: {
     marginLeft: moderateScale(15),
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: '600',
     color: '#434343',
   },
@@ -291,22 +460,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
-// ref={(ref) => (scrollView = ref)}
-//  componentWillMount0 }
-//    this.keyboardDidShowListener = Keyboard.addListener(
-//     'keyboardDidShow;,
-//     this_keyboardDidShow,
-//    ):
-//    this.keyboardDidHideListener = = Keyboard.addListener(
-//     'keyboardDidHide;,
-//     this_keyboardDidHide,
-//   componentWillUnmount() {
-//    this.keyboardDidShowListener.remove():
-//    this.keyboardDidHideListener.remove();
-//  _keyboardDidShow=0 =>
-//    // scrollView.scrollToEnd(I) animated: true }):
-//    scrollView.scrollTo(f y: DHeight(220), animated: true });
-//    this.setState(f heightTop: DHeight(260) )):
-//  _keyboardDidHide=00 =>
-//    this.setState(f heightTop: DHeight(30) ));

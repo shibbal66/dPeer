@@ -21,6 +21,13 @@ import WhereTo from '../screens/WhereTo';
 import MyTrips from '../screens/MyTrips';
 import {NavigationContainer} from '@react-navigation/native';
 import ChooseLocation from '../components/ChooseLocation';
+import Wallet from '../screens/Wallet';
+import AccountInfo from '../screens/AccountInfo';
+import FindingPool from '../screens/FindingPool';
+import PrivacyPolicy from '../screens/PrivacyPolicy';
+import Language from '../screens/Language';
+import Help from '../screens/Help';
+
 const Stack = createNativeStackNavigator();
 
 export default function AuthStack() {
@@ -69,24 +76,39 @@ export default function AuthStack() {
               />
             </>
           )}
-
           <Stack.Screen
             name={NavigationStrings.REGISTER}
             component={Register}
           />
-
           <Stack.Screen
             name={NavigationStrings.HOMESCREEN}
             component={HomeScreen}
           />
           <Stack.Screen name={NavigationStrings.SIGNIN} component={SignIn} />
-
           <Stack.Screen name={NavigationStrings.PROFILE} component={Profile} />
           <Stack.Screen name={NavigationStrings.MYTRIPS} component={MyTrips} />
           <Stack.Screen
             name={NavigationStrings.CHOOSELOCATION}
             component={ChooseLocation}
           />
+          <Stack.Screen name={NavigationStrings.WALLET} component={Wallet} />
+          <Stack.Screen
+            name={NavigationStrings.ACCOUNTINFO}
+            component={AccountInfo}
+          />
+          <Stack.Screen
+            name={NavigationStrings.FINDINGPOOL}
+            component={FindingPool}
+          />
+          <Stack.Screen
+            name={NavigationStrings.PRIVACYPOLICY}
+            component={PrivacyPolicy}
+          />
+          <Stack.Screen
+            name={NavigationStrings.LANGUAGE}
+            component={Language}
+          />
+          <Stack.Screen name={NavigationStrings.HELP} component={Help} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

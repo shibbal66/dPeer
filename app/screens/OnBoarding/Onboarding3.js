@@ -31,7 +31,7 @@ const Onboarding3 = () => {
         }
       />
       <OnboardingFooter
-        screen={NavigationStrings.HOMESCREEN}
+        screen={NavigationStrings.REGISTER}
         screen2={NavigationStrings.REGISTER}
       />
     </SafeAreaView>

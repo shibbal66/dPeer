@@ -47,7 +47,8 @@ const Profile = () => {
         </View>
       </View>
       <View style={styles.bottomView}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(NavigationStrings.WALLET)}>
           <View style={styles.tabView}>
             <Image
               style={{
@@ -61,7 +62,8 @@ const Profile = () => {
             <Text style={styles.text2}>Securely Manage your Funds</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(NavigationStrings.ACCOUNTINFO)}>
           <View style={styles.tabView}>
             <Image
               style={{
@@ -81,7 +83,8 @@ const Profile = () => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(NavigationStrings.PRIVACYPOLICY)}>
           <View style={styles.tabView}>
             <Image
               style={{
@@ -101,7 +104,8 @@ const Profile = () => {
             </Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(NavigationStrings.LANGUAGE)}>
           <View style={styles.tabView}>
             <Image
               style={{
@@ -115,7 +119,8 @@ const Profile = () => {
             <Text style={styles.text2}>Choose Your Preferred Language</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate(NavigationStrings.HELP)}>
           <View style={styles.tabView}>
             <Image
               style={{

@@ -27,7 +27,7 @@ const NavBar = () => {
   return (
     <View style={styles.NavBar}>
       <Pressable
-        onPress={() => changeText('Home')}
+        onPress={() => navigation.navigate(NavigationStrings.HOMESCREEN)}
         style={styles.IconBehaviour}
         android_ripple={{borderless: true, radius: 50}}>
         <AntDesign

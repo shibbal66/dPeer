@@ -12,28 +12,52 @@ import {moderateScale} from 'react-native-size-matters';
 import DestinationSearch from './DestinationSearch';
 import {showSuccess} from '../helper/helperFunction';
 import {showError} from '../helper/helperFunction';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 //import {ScrollView} from 'react-native-gesture-handler';
 
 const ChooseLocation = props => {
+  const [pickupError, setPickupError] = useState('');
+  const [destinationError, setDestinationError] = useState('');
   const [state, setState] = useState({
-    destinationCords: {},
     pickupCords: {},
+    destinationCords: {},
   });
   const {pickupCords, destinationCords} = state;
   const onDone = () => {
-    // props.route.params.getCordinates({
-    //   pickupCords,
-    //   destinationCords,
-    // });
-    // }
-    // showSuccess('Locating');
-    props.route.params.getCordinates({pickupCords, destinationCords});
-    navigation.navigate(NavigationStrings.HOMESCREEN);
+    const isValid = checkValid();
+
+    if (isValid) {
+      props.route.params.getCordinates({
+        pickupCords,
+        destinationCords,
+      });
+      navigation.navigate(NavigationStrings.HOMESCREEN);
+      showSuccess('Locating');
+    }
   };
-  const fetchPickUpCords = (lat, lng) => {
-    // console.log('lat==>>>', lat);
-    // console.log('city texts', lng);
+
+  const checkValid = () => {
+    let isValid = true;
+
+    if (Object.keys(pickupCords).length === 0) {
+      setPickupError('Please enter your current location');
+      isValid = false;
+    } else {
+      setPickupError('');
+    }
+
+    if (Object.keys(destinationCords).length === 0) {
+      setDestinationError('Please enter your destination location');
+      isValid = false;
+    } else {
+      setDestinationError('');
+    }
+
+    return isValid;
+  };
+
+  const fetchPickupCords = (lat, lng) => {
     setState({
       ...state,
       pickupCords: {
@@ -41,7 +65,6 @@ const ChooseLocation = props => {
         longitude: lng,
       },
     });
-    //console.log('run');
   };
   const fetchDestinationCords = (lat, lng) => {
     setState({
@@ -52,22 +75,22 @@ const ChooseLocation = props => {
       },
     });
   };
+  console.log('dest=====>', pickupCords);
 
-  console.log('pickupe==>>>', pickupCords);
   console.log('dest=====>', destinationCords);
   console.log('props====>', props);
 
-  const checkValid = () => {
-    if (Object.keys(pickupCords).length === 0) {
-      showError('Please enter your current location');
-      return false;
-    }
-    if (Object.keys(destinationCords).length === 0) {
-      showError('Please enter your destination location');
-      return false;
-    }
-    return true;
-  };
+  // const checkValid = () => {
+  //   if (Object.keys(pickupCords).length === 0) {
+  //     showError('Please enter your current location');
+  //     return false;
+  //   }
+  //   if (Object.keys(destinationCords).length === 0) {
+  //     showError('Please enter your destination location');
+  //     return false;
+  //   }
+  //   return true;
+  // };
 
   const [originPlace, setOriginPlace] = useState(null);
   const [destinationPlace, setDestinationPlace] = useState(null);
@@ -84,7 +107,7 @@ const ChooseLocation = props => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView
         keyboardShouldPersistTaps="handled"
         style={{backgroundColor: 'white', flex: 1, padding: 24}}>
@@ -98,7 +121,6 @@ const ChooseLocation = props => {
           />
         </View>
         <View style={styles.line} />
-        {/* Square near Destination input */}
         <View style={styles.locationpin}>
           <MaterialIcons
             name="location-pin"
@@ -108,23 +130,28 @@ const ChooseLocation = props => {
             style={{fontSize: moderateScale(23)}}
           />
         </View>
-
         <DestinationSearch
           placheholderText="Enter Current Location"
-          fetchAddress={fetchPickUpCords}
+          fetchAddress={fetchPickupCords}
         />
+        <Text style={{color: 'red', paddingLeft: moderateScale(30)}}>
+          {pickupError}
+        </Text>
 
         <DestinationSearch
           placheholderText="Enter Destination Location"
           fetchAddress={fetchDestinationCords}
         />
+        <Text style={{color: 'red', paddingLeft: moderateScale(30)}}>
+          {destinationError}
+        </Text>
         <CustomBtn
           btnText="Done"
           onPress={onDone}
-          btnStyle={{marginTop: 404}}
+          btnStyle={{marginTop: 254}}
         />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

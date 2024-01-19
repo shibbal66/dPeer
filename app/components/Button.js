@@ -11,7 +11,9 @@ const Button = props => {
   // const confirm
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.buttonContainer}>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={props.handleFunc}>
         {/* <Image
         style={styles.logo}
         source={require('../assets/images/metalogow.png')}

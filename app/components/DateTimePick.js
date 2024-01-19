@@ -123,5 +123,6 @@ const styles = StyleSheet.create({
   datetimeText: {
     fontSize: responsiveFontSize(2.4),
     padding: '',
+    color: 'black',
   },
 });
